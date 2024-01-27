@@ -1,13 +1,42 @@
-import React from 'react'
+import React, { useEffect }from 'react'
+import { connect } from 'react-redux'
+import { fetchQuiz, setQuiz, selectAnswer, setMessage } from '../state/action-creators'
 
-export default function Quiz(props) {
+
+
+
+
+
+
+
+
+
+function Quiz(props) {
+
+const { quiz, selectAnswer } = props
+
+
+function test() {
+  fetchQuiz()
+}
+
+
+  useEffect(() => {
+    console.log('useEffect')
+    if (quiz === null) {
+      console.log('fetchQuiz')
+      fetchQuiz()
+    }
+  }, [])
+
   return (
+   
     <div id="wrapper">
       {
         // quiz already in state? Let's use that, otherwise render "Loading next quiz..."
         true ? (
           <>
-            <h2>What is a closure?</h2>
+            <h2>{quiz?.question}</h2>
 
             <div id="quizAnswers">
               <div className="answer selected">
@@ -19,16 +48,25 @@ export default function Quiz(props) {
 
               <div className="answer">
                 An elephant
-                <button>
+                <button>  
                   Select
                 </button>
               </div>
             </div>
 
-            <button id="submitAnswerBtn">Submit answer</button>
+            <button id="submitAnswerBtn" onClick={test}>Submit answer</button>
           </>
         ) : 'Loading next quiz...'
       }
     </div>
   )
 }
+
+const mapStateToProps = (state) => {
+  return {
+    quiz: state.quiz,
+    selectAnswer: state.selectAnswer
+  }
+}
+
+export default connect(mapStateToProps, {setQuiz, selectAnswer, setMessage, fetchQuiz })(Quiz)
