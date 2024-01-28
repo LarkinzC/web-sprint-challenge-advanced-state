@@ -18,8 +18,8 @@ export function moveClockwise() { }
 
 export function moveCounterClockwise() { }
 
-export function selectAnswer(answer) {
-  return ({ type: SET_SELECTED_ANSWER, payload : answer })
+export function selectAnswer(isSelected) {
+  return ({ type: SET_SELECTED_ANSWER, payload : isSelected })
  }
 
 export function setMessage() { }
@@ -37,7 +37,6 @@ export function resetForm() {
 // ❗ Async action creators
 
 export function fetchQuiz() {
-  console.log('getting data')
   return function (dispatch) {
     // First, dispatch an action to reset the quiz state (so the "Loading next quiz..." message can display)
     // dispatch(resetForm())

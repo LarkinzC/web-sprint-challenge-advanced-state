@@ -25,18 +25,19 @@ export const initialState = null
 function quiz(state = initialState, action) {
    switch(action.type) {
      case SET_QUIZ_INTO_STATE:
-      console.log('howdy')
        return state = action.payload 
       default: 
       return state
    }
 }
 
-const initialSelectedAnswerState = null
+const initialSelectedAnswerState = false
 function selectedAnswer(state = initialSelectedAnswerState, action) {
   switch(action.type) {
     case SET_SELECTED_ANSWER: 
-      return state = action.payload
+      return {
+        ...state, selectedAnswer: action.payload
+      }
     default: 
       return state
   }
