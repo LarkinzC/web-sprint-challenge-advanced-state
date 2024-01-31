@@ -31,7 +31,9 @@ export function setQuiz(quizData) {
   return ({type: SET_QUIZ_INTO_STATE, payload: quizData})
 }
 
-export function inputChange() { }
+export function inputChange(text, target) {
+  return ({ type: INPUT_CHANGE, payload: { text, target}})
+ }
 
 export function resetForm() {
   return ({ type: RESET_FORM})
@@ -74,11 +76,11 @@ export function postAnswer(quizID, answerID) {
       });
   }
 }
-// export function postQuiz() {
-//   return function (dispatch) {
-//     // On successful POST:
-//     // - Dispatch the correct message to the the appropriate state
-//     // - Dispatch the resetting of the form
-//   }
-// }
+export function postQuiz() {
+  return function (dispatch) {
+    // On successful POST:
+    // - Dispatch the correct message to the the appropriate state
+    // - Dispatch the resetting of the form
+  }
+}
 // ❗ On promise rejections, use log statements or breakpoints, and put an appropriate error message in state
