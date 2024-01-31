@@ -1,23 +1,21 @@
-import React from 'react'
-import { connect } from 'react-redux'
-import { selectedAnswer } from '../state/action-creators'
-
+import React from 'react';
+import { connect } from 'react-redux';
 
 function Message(props) {
-  const { selectedAnswer, correctAnswer } = props
-  
-  const isCorrect = selectedAnswer === correctAnswer
+  const { infoMessage } = props;
 
-  return <div id="message">
-    {isCorrect ? 'Correct! Well done!' : 'Incorrect. Try again.'}
-          </div>
 
+  return (
+    <div id="message">
+      {infoMessage === 'Nice job! That was the correct answer' ? 'Nice job! That was the correct answer' : 'What a shame! That was the incorrect answer'}
+    </div>
+  );
 }
-
 
 const mapStateToProps = (state) => ({
   selectedAnswer: state.selectedAnswer,
-  correctAnswer: state.correctAnswer
-})
+  quiz: state.quiz,
+  infoMessage: state.infoMessage
+});
 
-export default connect(mapStateToProps)(Message)
+export default connect(mapStateToProps)(Message);

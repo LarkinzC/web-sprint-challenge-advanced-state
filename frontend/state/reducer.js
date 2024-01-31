@@ -13,9 +13,9 @@ const initialWheelState = 0
 function wheel(state = initialWheelState, action) {
   switch(action.type) {
     case MOVE_CLOCKWISE:
-      return state + 1
+      return ((state + 1) % 6)
     case MOVE_COUNTERCLOCKWISE:
-      return state - 1
+      return ((state - 1 + 6) % 6)
       default:
         return state
       }
@@ -25,19 +25,18 @@ export const initialState = null
 function quiz(state = initialState, action) {
    switch(action.type) {
      case SET_QUIZ_INTO_STATE:
+      console.log('New quiz state', action.payload)
        return state = action.payload 
       default: 
       return state
    }
 }
 
-const initialSelectedAnswerState = false
+const initialSelectedAnswerState = null
 function selectedAnswer(state = initialSelectedAnswerState, action) {
   switch(action.type) {
     case SET_SELECTED_ANSWER: 
-      return {
-        ...state, selectedAnswer: action.payload
-      }
+      return state = action.payload
     default: 
       return state
   }

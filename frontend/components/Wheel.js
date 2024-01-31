@@ -1,39 +1,37 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { MOVE_CLOCKWISE, MOVE_COUNTERCLOCKWISE } from '../state/action-types'
 import {useState} from 'react'
+import { moveClockwise, moveCounterClockwise } from '../state/action-creators';
 
  function Wheel(props) {
-  const [activeCog, setActiveCog] = useState(0);
+  // const handleClockwiseClick = () => {
+  //   props.dispatch({ type: MOVE_CLOCKWISE });
+  //   setActiveCog((prevCog) => (prevCog + 1) % 6); 
+  // };
 
-  const handleClockwiseClick = () => {
-    props.dispatch({ type: MOVE_CLOCKWISE });
-    setActiveCog((prevCog) => (prevCog + 1) % 6); 
-  };
-
-  const handleCounterClockwiseClick = () => {
-    props.dispatch({ type: MOVE_COUNTERCLOCKWISE });
-    setActiveCog((prevCog) => (prevCog - 1 + 6) % 6);
-  };
-
+  // const handleCounterClockwiseClick = () => {
+  //   props.dispatch({ type: MOVE_COUNTERCLOCKWISE });
+  //   setActiveCog((prevCog) => (prevCog - 1 + 6) % 6);
+  // };
+const {moveClockwise, moveCounterClockwise, wheel} = props
   return (
     <div id="wrapper">
       <div id="wheel">
         {[0, 1, 2, 3, 4, 5].map((i) => (
           <div
             key={i}
-            className={`cog ${activeCog === i ? 'active' : ''}`}
+            className={`cog ${wheel === i ? 'active' : ''}`}
             style={{ '--i': i }}
           >
-            {activeCog === i ? 'B' : ''}
+            {wheel === i ? 'B' : ''}
           </div>
         ))}
       </div>
       <div id="keypad">
-        <button id="counterClockwiseBtn" onClick={handleCounterClockwiseClick}>
+        <button id="counterClockwiseBtn" onClick={moveCounterClockwise}>
           Counter clockwise
         </button>
-        <button id="clockwiseBtn" onClick={handleClockwiseClick}>
+        <button id="clockwiseBtn" onClick={moveClockwise}>
           Clockwise
         </button>
       </div>
@@ -47,4 +45,4 @@ const mapStatetoProps = state => {
   }
 }
 
-export default connect(mapStatetoProps)(Wheel)
+export default connect(mapStatetoProps, {moveClockwise, moveCounterClockwise})(Wheel)
